@@ -8,8 +8,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/jaredpetersen/dynamicsqldriver"
 	"github.com/stretchr/testify/assert"
+
+	"github.com/jaredpetersen/dynamicsqldriver"
 )
 
 func TestConnectorDriverReturnsDriver(t *testing.T) {
