@@ -7,8 +7,9 @@ generate credentials any time the SQL package opens up a new connection. This is
 management systems like HashiCorp Vault that generate and manage database users on your behalf.
 
 Create your own implementation of `dynamicsqldriver.CredentialsGenerator` and set the username and password portion of
-your database connection string to `genusername` and `genpassword` respectively. The generator will replace those
-values in the connection string with the generated values on your behalf.
+your database connection string to `genusername` and `genpassword` respectively. dynamicsqldriver will call your
+generator when a new database connection is needed and then replace those values in the connection string before
+passing it along to your favorite SQL driver.
 
 ## Usage
 
