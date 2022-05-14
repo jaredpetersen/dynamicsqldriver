@@ -1,7 +1,6 @@
 package dynamicsqldriver
 
 import (
-	"database/sql"
 	"database/sql/driver"
 	"fmt"
 	"strings"
@@ -23,7 +22,8 @@ type CredentialsGenerator interface {
 	Generate() (Credentials, error)
 }
 
-// Driver implements driver.Driver, retrieving database credentials and supports retrieving connection information from Vault.
+// Driver wraps a real driver.Driver while maintaining the same interface and offering support for credentials
+// generation upon opening a new connection.
 type Driver struct {
 	Actual               driver.Driver
 	CredentialsGenerator CredentialsGenerator
@@ -44,14 +44,4 @@ func (d Driver) Open(dsn string) (driver.Conn, error) {
 	}
 
 	return d.Actual.Open(dsn)
-}
-
-// Register registers a new Driver with database/sql so that it may be used with sql.Open.
-func Register(actualDriver driver.Driver, gen CredentialsGenerator) {
-	wrapDriver := Driver{
-		Actual:               actualDriver,
-		CredentialsGenerator: gen,
-	}
-
-	sql.Register("dynamicsql", &wrapDriver)
 }
