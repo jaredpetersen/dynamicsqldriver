@@ -2,11 +2,7 @@ module github.com/jaredpetersen/dynamicsqldriver
 
 go 1.17
 
-require (
-	github.com/go-sql-driver/mysql v1.6.0
-	github.com/google/uuid v1.3.0
-	github.com/stretchr/testify v1.7.1
-)
+require github.com/stretchr/testify v1.7.1
 
 require (
 	github.com/davecgh/go-spew v1.1.0 // indirect
